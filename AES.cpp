@@ -80,6 +80,20 @@ int main()
     }
     fclose(in_file);
 
+        // cout << "password:";
+    // //gets(password);                         
+    // fgets(password,80,stdin);                       // capture password through keyboard       
+    // password_lenght= strlen(password);  
+    
+    // for(i=0;i<password_lenght;i++) {cout << password[i];} 
+    
+    // //cout << endl << "-------------\n";
+
+    // fill_password_matrix();
+    // print_password_matrix(); 
+    // fill_pass_matrix_hex();
+
+    
     fill_state_matrix();
     print_state_matrix();
     SubBytes();
