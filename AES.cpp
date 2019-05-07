@@ -16,6 +16,7 @@
     char state_matrix[rows][cols];
 
     char password_matrix[rows][cols];
+    char password_hex_matrix[rows][cols];
     char chipher_matrix[rows][cols];
     char aux_matrix[rows][cols];
     int state_hex_matrix[rows][cols];
@@ -48,8 +49,6 @@
     };
     int count_rcon = 0;
 
-
-
     char hex_number[]= "0123456789abcdef";
 
 
@@ -65,6 +64,7 @@
 
 #include "matrix_operations.h"
 #include "write_read_disk.h"
+#include "password.h"
 //--------------------------------
 using namespace std;
 
@@ -89,24 +89,50 @@ int main()
     }
     fclose(in_file);
 
-        // cout << "password:";
-    // //gets(password);                         
-    // fgets(password,80,stdin);                       // capture password through keyboard       
-    // password_lenght= strlen(password);  
+    cout << "password:";
+    //gets(password);                         
+    fgets(password,80,stdin);                       // capture password through keyboard       
+    password_lenght= strlen(password);  
     
-    // for(i=0;i<password_lenght;i++) {cout << password[i];} 
+    for(i=0;i<password_lenght;i++) {cout << password[i];} 
     
-    // //cout << endl << "-------------\n";
+    //cout << endl << "-------------\n";
+
+    fill_password_matrix();
+    print_password_matrix(); 
+
+    for(int i=0;i<18;i++)
+        {
+            if (i%2==0)
+            {
+                fill_pass_matrix_hex();
+                print_password_matrix(); 
+            }
+            else
+            {
+                xor_key_schedule();
+                print_password_matrix(); 
+
+            }
+        }    
 
     // fill_password_matrix();
     // print_password_matrix(); 
-    // fill_pass_matrix_hex();
+    // for(int i=0;i<10;i++)
+    // {
+        
+    //     fill_pass_matrix_hex();
+    //     print_password_matrix(); 
+    //     xor_key_schedule();
+    //     print_password_matrix(); 
 
-    
-    fill_state_matrix();
-    print_state_matrix();
-    SubBytes();
-    ShiftRows();
+    // }
+
+    // fill_state_matrix();
+    // print_state_matrix();
+    // SubBytes();
+    // ShiftRows();
+
     gets(dummy);
 
 }
