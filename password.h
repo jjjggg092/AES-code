@@ -11,7 +11,7 @@ void fill_pass_matrix_hex(void) {
 
   printf("------------------\n");
   for (size_t i = 0; i < rows; i++) {
-      printf("%x  ",rot_word[i]);
+      printf("%c  ",rot_word[i]);
     }
     printf("\n");
 
@@ -34,5 +34,27 @@ void fill_pass_matrix_hex(void) {
       printf("%x  ",rot_word[i]);
     }
     printf("\n");
-  
+
+    //   printf("%d\n  ",int(password_matrix[0][0]));
+    //   printf("%x \n ",int(rcon[0][0]));
+
+    for(int i=0;i<4;i++)
+    {
+        rot_word[i] = char(rot_word[i])^char(password_matrix[i][0])^char(rcon[i][count_rcon]);  //digamos que funciona
+        password_matrix[i][0] = char(rot_word[i]);
+        // printf("%x\n", rot_word[i]);
+    }
+    count_rcon++;
+    
+
 }
+
+void xor_key_schedule(void)
+{
+    for(int i=1;i<4;i++)
+        for(int j=0;j<4;j++)
+    {   
+        password_matrix[j][i] = char(password_matrix[j][i])^char(password_matrix[j][i-1]); 
+    }
+}
+
