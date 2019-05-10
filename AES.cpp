@@ -119,6 +119,7 @@ char abc[]= "abcdefghijklmnopqrstuvwxyz";
 //------------------------------------------
 int main()
 {
+    
 
     printf("%x ",0x61^0xef^0x01);
     unsigned int i;
@@ -178,7 +179,8 @@ int main()
                 ShiftRows();
                 // print_state_matrix();
 
-                MixColumns(state);
+                matrixToArray();
+                MixColumns();
                 AddRoundKey();
                 cout<<"AddRounKey"<<endl;
 
@@ -188,11 +190,12 @@ int main()
         }    
 
                 fill_pass_matrix_hex();
-                xor_key_schedule();
+                xor_key_schedule(); print_password_matrix();
 
-                SubBytes();
+               SubBytes();
                 ShiftRows();
-                AddRoundKey();
+                F_AddRoundKey();
+                
                 cout<<"please"<<endl;
                 print_state_matrix();
                 

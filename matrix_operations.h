@@ -261,15 +261,19 @@ void ShiftRows(void) {
 
 void matrixToArray(void){
       int k = 0;
+      printf("AQUI");
       for(int i = 0; i<rows ; i++)
           for(int j = 0; j<cols; j++){
-              state[k++] = state_matrix[i][j];
-
+              state[k] = state_matrix[j][i];
+              printf("%x ",state[k]);
+              
+              //printf("%x ", state_matrix[i][j]);
+              k++;
   }
   }
   
 
-  void MixColumns(unsigned char * state) {
+  void MixColumns(void) {
 	unsigned char tmp[16];
 
 	tmp[0] = (unsigned char) mul2[state[0]] ^ mul3[state[1]] ^ state[2] ^ state[3];
@@ -298,7 +302,7 @@ void matrixToArray(void){
     
     puts("MixColums: ");
     for(int i = 0; i<16;i++){
-        printf("%x ", state[i]);}
+        printf("%x ", state_matrix[i]);}
 }
 
 void AddRoundKey()
@@ -306,8 +310,9 @@ void AddRoundKey()
   int k=0;
   
   for(int i=0;i<rows;i++)
-    for(int j=0;j<cols;j++)
-      state_matrix[i][j] = state[k++] ^ password_matrix[i][j];      
+    for(int j=0;j<cols;j++){
+      state_matrix[j][i] = state[k] ^ password_matrix[j][i];   
+      k++;   }
 }
 void F_AddRoundKey()
 {
