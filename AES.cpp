@@ -13,14 +13,14 @@
     char password[80];
     char password2[80];
     int  key;
-    char state_matrix[rows][cols];
+    unsigned char state_matrix[rows][cols];
     unsigned char state[16];
     unsigned char password_matrix[rows][cols];
-    unsigned char password_hex_matrix[rows][cols];
+    // unsigned char password_hex_matrix[rows][cols];
     unsigned char chipher_matrix[rows][cols];
     unsigned char aux_matrix[rows][cols];
     // unsigned int state_hex_matrix[rows][cols];
-    unsigned char state_hex_matrix[rows][cols];
+    // unsigned char state_hex_matrix[rows][cols];
     int password_lenght;
 
     unsigned char mul2[] =
@@ -119,6 +119,8 @@ char abc[]= "abcdefghijklmnopqrstuvwxyz";
 //------------------------------------------
 int main()
 {
+
+    printf("%x ",0x61^0xef^0x01);
     unsigned int i;
     int j;
     FILE *in_file;
@@ -148,18 +150,25 @@ int main()
     print_state_matrix();
 
     F_AddRoundKey();
+    print_state_matrix();
+
 
     for(int i=0;i<18;i++)
         {
             if (i%2==0)
             {
                 fill_pass_matrix_hex();
-                // print_password_matrix(); 
+                cout<<"passw"<<endl;
+
+                print_password_matrix(); 
                 printf("\ncount_rcon >>%d\n", count_rcon);
             }
             else
             {
                 xor_key_schedule();
+                cout<<"passw"<<endl;
+
+                print_password_matrix(); 
 
                 cout<<"subbytes matrix"<<endl;
 
@@ -172,8 +181,8 @@ int main()
                 MixColumns(state);
                 AddRoundKey();
                 cout<<"AddRounKey"<<endl;
+
                 print_state_matrix();
-                // print_password_matrix(); 
 
             }
         }    
@@ -184,6 +193,9 @@ int main()
                 SubBytes();
                 ShiftRows();
                 AddRoundKey();
+                cout<<"please"<<endl;
+                print_state_matrix();
+                
 
 
     // fill_password_matrix();

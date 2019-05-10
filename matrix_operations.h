@@ -26,7 +26,8 @@ void print_state_matrix(void)
             cout<<endl;
             for (j=0;j<cols;j++)
                 {
-                 cout<<" " <<state_matrix[i][j];  // mantiene fija la fila y barre las columnas
+                  printf("%x ",state_matrix[i][j]);
+                //  cout<<" " <<state_matrix[i][j];  // mantiene fija la fila y barre las columnas
                 }
             }
         cout<<endl<<"---------"<<endl;
@@ -194,7 +195,7 @@ void decypher_pass_text(void)
 
 
 void SubBytes(void) {
-  int matrix[rows][cols*2], nib_0, nib_1;
+  unsigned char matrix[rows][cols*2], nib_0, nib_1;
   char nibble[2];
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols*2; j=j+2) {
@@ -208,12 +209,13 @@ void SubBytes(void) {
     nib_1=nibble[1];          //   lo convierte en entero para imprimir
     nib_1=nib_1 & 15;         //   solo 4 bits menos significativos
     matrix[i][j+1]=nib_1;
-    state_hex_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
+    state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
     }
   }
+  cout <<"no se algo"<<endl;
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols*2 ; j=j+2) {
-      //state_hex_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
+      //state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
       printf("%x%x  ",matrix[i][j] ,matrix[i][j+1]);
     }
     printf("\n");
@@ -221,7 +223,7 @@ void SubBytes(void) {
   printf("------------------\n");
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols ; j++) {
-      printf("%c  ",state_hex_matrix[i][j] );
+      printf("%x  ",state_matrix[i][j] );
     }
     printf("\n");
   }
@@ -230,27 +232,27 @@ void SubBytes(void) {
 void ShiftRows(void) {
   int aux1, aux2, arr[4];;
 
-  aux1= state_hex_matrix[1][0];
+  aux1= state_matrix[1][0];
   printf("Shift Rows:\n");
   for (size_t i = 0; i < 3; i++)
-    state_hex_matrix[1][i]=state_hex_matrix[1][i+1];
-  state_hex_matrix[1][3]=aux1;
+    state_matrix[1][i]=state_matrix[1][i+1];
+  state_matrix[1][3]=aux1;
 
-  aux1= state_hex_matrix[2][0];
-  aux2= state_hex_matrix[2][1];
+  aux1= state_matrix[2][0];
+  aux2= state_matrix[2][1];
   for (size_t i = 0; i < 2; i++)
-    state_hex_matrix[2][i]=state_hex_matrix[2][i+2];
-  state_hex_matrix[2][2]=aux1;
-  state_hex_matrix[2][3]=aux2;
+    state_matrix[2][i]=state_matrix[2][i+2];
+  state_matrix[2][2]=aux1;
+  state_matrix[2][3]=aux2;
 
-  for (size_t i = 0; i < 4; i++) arr[i]=state_hex_matrix[3][i];
+  for (size_t i = 0; i < 4; i++) arr[i]=state_matrix[3][i];
   for (size_t i = 0; i < 3; i++)
-    state_hex_matrix[3][i+1]=arr[i];
-  state_hex_matrix[3][0]=arr[3];
+    state_matrix[3][i+1]=arr[i];
+  state_matrix[3][0]=arr[3];
 
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols ; j++) {
-      printf("%x  ",state_hex_matrix[i][j] );
+      printf("%x  ",state_matrix[i][j] );
     }
     printf("\n");
   }
@@ -261,7 +263,7 @@ void matrixToArray(void){
       int k = 0;
       for(int i = 0; i<rows ; i++)
           for(int j = 0; j<cols; j++){
-              state[k++] = state_hex_matrix[i][j];
+              state[k++] = state_matrix[i][j];
 
   }
   }
@@ -303,13 +305,13 @@ void AddRoundKey()
 {
   int k=0;
   
-  for(int i=0;i<16;i++)
-    for(int j=0;j<16;j++)
-      state_hex_matrix[i][j] = state[k++] ^ password_matrix[i][j];      
+  for(int i=0;i<rows;i++)
+    for(int j=0;j<cols;j++)
+      state_matrix[i][j] = state[k++] ^ password_matrix[i][j];      
 }
 void F_AddRoundKey()
 {
-  for(int i=0;i<16;i++)
-    for(int j=0;j<16;j++)
-      state_hex_matrix[i][j] = state_matrix[i][j] ^ password_matrix[i][j];      
+  for(int i=0;i<rows;i++)
+    for(int j=0;j<cols;j++)
+      state_matrix[i][j] = state_matrix[i][j] ^ password_matrix[i][j];      
 }
