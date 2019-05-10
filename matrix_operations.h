@@ -2,21 +2,6 @@
 
 //          Matrix operations routines
 //---------------------------------------------------------------------------
-void print_matrix(char matrix[rows][cols])
-{
- int i,j;
-    
-        for(i=0;i<rows;i++)    // matrix [fila][column]
-            {
-            cout<<endl;
-            for (j=0;j<cols;j++)
-                {
-                 cout<<" " <<matrix[i][j];  // mantiene fija la fila y barre las columnas 
-                }
-            }
-        cout<<endl<<"---------"<<endl;
-}
-
 void print_aux_matrix(void)
 {
  int i,j;
@@ -56,8 +41,11 @@ void print_password_matrix(void)
             cout<<endl;
             for (j=0;j<cols;j++)
                 {
-                 cout<<" " <<password_matrix[i][j];  // mantiene fija la fila y barre las columnas
+                 printf("%x ",password_matrix[i][j]); 
+                //  cout<<" " <<password_matrix[i][j];  // mantiene fija la fila y barre las columnas
                 }
+                    // cout<<endl;
+            
             }
         cout<<endl<<"---------"<<endl;
 }
@@ -269,15 +257,12 @@ void ShiftRows(void) {
 }
 
 
-  void ModuloMultiplication(int vector[4]) {
-    //codigo de la multiplicacion mod 16
-  }
-  
-  void matrixToArray(void){
+void matrixToArray(void){
       int k = 0;
       for(int i = 0; i<rows ; i++)
           for(int j = 0; j<cols; j++){
               state[k++] = state_hex_matrix[i][j];
+
   }
   }
   
@@ -312,4 +297,19 @@ void ShiftRows(void) {
     puts("MixColums: ");
     for(int i = 0; i<16;i++){
         printf("%x ", state[i]);}
+}
+
+void AddRoundKey()
+{
+  int k=0;
+  
+  for(int i=0;i<16;i++)
+    for(int j=0;j<16;j++)
+      state_hex_matrix[i][j] = state[k++] ^ password_matrix[i][j];      
+}
+void F_AddRoundKey()
+{
+  for(int i=0;i<16;i++)
+    for(int j=0;j<16;j++)
+      state_hex_matrix[i][j] = state_matrix[i][j] ^ password_matrix[i][j];      
 }

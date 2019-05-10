@@ -2,6 +2,7 @@ void fill_pass_matrix_hex(void) {
   int matrix[4][2], nib_0, nib_1;
   unsigned char nibble[2];
   int rot_word[4];
+  
 
   rot_word[0] = int(password_matrix[1][3]);  
   rot_word[1] = int(password_matrix[2][3]);  
@@ -11,7 +12,7 @@ void fill_pass_matrix_hex(void) {
 
   printf("------------------\n");
   for (size_t i = 0; i < rows; i++) {
-      printf("%c  ",rot_word[i]);
+      printf("%x  ",rot_word[i]);
     }
     printf("\n");
 
@@ -35,24 +36,15 @@ void fill_pass_matrix_hex(void) {
     }
     printf("\n");
 
-    //   printf("%d\n  ",int(password_matrix[0][0]));
-    //   printf("%x \n ",int(rcon[0][0]));
-
-    char char_rot_word[4];
-    for(int i=0;i<4;i++)
-    {   
-        char_rot_word[i] = char(rot_word[i]);
-    }
-    printf("char------------------\n");
 //   for (size_t i = 0; i < rows; i++) {
 //       printf("%x  ",char_rot_word[i]);
 //     }
 //     printf("\n");
-
+    char char_rot_word[4];
     for(int i=0;i<4;i++)
     {
         char_rot_word[i] = char(char_rot_word[i])^char(password_matrix[i][0])^char(rcon[i][count_rcon]);  //digamos que funciona
-        password_matrix[i][0] = char(rot_word[i]);
+        password_matrix[i][0] = char(char_rot_word[i]);
         // printf("%x\n", rot_word[i]);
     }
     count_rcon++;
