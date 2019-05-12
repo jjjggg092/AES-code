@@ -133,7 +133,7 @@
         {00,00,00,00,00,00,00,00,00,00},
         {00,00,00,00,00,00,00,00,00,00}
     };
-    int count_rcon = 0;
+    int count_rcon = 9;
 
     char hex_number[]= "0123456789abcdef";
 
@@ -193,8 +193,17 @@ int main()
     cout<<"plaintex matrix"<<endl;
     print_state_matrix();
 
+
     F_AddRoundKey();
-    print_state_matrix();
+
+    // ShiftRows();
+
+    // SubBytes();
+  
+
+
+    // F_AddRoundKey();
+
 
 
     for(int i=0;i<18;i++)
@@ -210,16 +219,20 @@ int main()
             else
             {
                 xor_key_schedule();
+                F_AddRoundKey();
+
                 cout<<"passw"<<endl;
                 print_password_matrix();
                 cout<<"subbytes matrix"<<endl;
-                SubBytes();
+                // SubBytes();
                 cout<<"SR matrix"<<endl;
-                ShiftRows();
                 // print_state_matrix();
                 matrixToArray();
                 MixColumns();
-                AddRoundKey();
+                ShiftRows();
+
+                SubBytes();
+
                 cout<<"AddRounKey"<<endl;
 
                 print_state_matrix();
@@ -230,12 +243,14 @@ int main()
                 fill_pass_matrix_hex();
                 xor_key_schedule(); print_password_matrix();
 
-                SubBytes();
-                ShiftRows();
-                F_AddRoundKey();
                 cout<<"please"<<endl;
                 print_state_matrix();
 
+        F_AddRoundKey();
+        cout<<"please"<<endl;
+        print_state_matrix();
+
     gets(dummy);
+
 
 }

@@ -149,6 +149,7 @@ void matrixToArray(void){
               //printf("%x ", state_matrix[i][j]);
               k++;
   }
+
   }
 
 
@@ -180,9 +181,16 @@ void matrixToArray(void){
 		state[i] = tmp[i];
 	}
 
-    puts("MixColums: ");
-    for(int i = 0; i<16;i++){
-        printf("%x ", state_matrix[i]);}
+    // puts("MixColums: ");
+    // for(int i = 0; i<16;i++){
+    //     printf("%x ", state_matrix[i]);}
+
+  int k=0;
+	for (int i = 0; i < 4;i++) {
+    for(int j = 0; j<4;j++){
+       state_matrix[j][i] =  state[k];
+       k++;}
+}
 }
 
 void AddRoundKey()

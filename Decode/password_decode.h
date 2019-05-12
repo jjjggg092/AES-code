@@ -61,7 +61,7 @@ void fill_pass_matrix_hex(void) {
         // printf("%x\n", rot_word[i]);
     }
 
-    count_rcon++;
+    count_rcon--;
 //     printf("char_xor------------------\n");
 //   for (size_t i = 0; i < rows; i++) {
 //       printf("%02x  ",char_rot_word[i]);
