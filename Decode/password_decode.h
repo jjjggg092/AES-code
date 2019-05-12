@@ -10,11 +10,11 @@ void fill_pass_matrix_hex(void) {
   rot_word[3] = password_matrix[0][3];
 
 
-  printf("------------------\n");
-  for (size_t i = 0; i < rows; i++) {
-      printf("%x  ",rot_word[i]);
-    }
-    printf("\n");
+//   printf("------------------\n");
+//   for (size_t i = 0; i < rows; i++) {
+//       printf("%x  ",rot_word[i]);
+//     }
+//     printf("\n");
 
     for(int i=0;i<4;i++)
     {
@@ -30,20 +30,20 @@ void fill_pass_matrix_hex(void) {
         rot_word[i] =inv_s[nib_0*16 + nib_1];   //cambia con la  tabla sbox
     }
 
-  printf("------------------\n");
-  for (size_t i = 0; i < rows; i++) {
-      printf("%x  ",rot_word[i]);
+//   printf("------------------\n");
+//   for (size_t i = 0; i < rows; i++) {
+//       printf("%x  ",rot_word[i]);
 
-    }
-    printf("\n");
-  printf("------------------\n");
-  for (size_t i = 0; i < rows; i++)
-      printf("%x  ",password_matrix[i][0]);
-    printf("\n");
+//     }
+//     printf("\n");
+//   printf("------------------\n");
+//   for (size_t i = 0; i < rows; i++)
+//       printf("%x  ",password_matrix[i][0]);
+//     printf("\n");
 
-  for (size_t i = 0; i < rows; i++)
-      printf("%x  ",rcon[i][count_rcon]);
-  printf("\n");
+//   for (size_t i = 0; i < rows; i++)
+//       printf("%x  ",rcon[i][count_rcon]);
+//   printf("\n");
 
 //   for (size_t i = 0; i < rows; i++) {
 //       printf("%x  ",char_rot_word[i]);
@@ -55,13 +55,13 @@ void fill_pass_matrix_hex(void) {
         // char_rot_word[i] = char_rot_word[i]^password_matrix[i][0]^rcon[i][count_rcon];  //digamos que funciona
         char_rot_word[i] = rot_word[i]^password_matrix[i][0];  //digamos que funciona
         char_rot_word[i]   =char_rot_word[i] ^rcon[i][count_rcon];
-        printf("%x ",char_rot_word[i]);
+        // printf("%x ",char_rot_word[i]);
         password_matrix[i][0] = char_rot_word[i];
 
         // printf("%x\n", rot_word[i]);
     }
 
-    count_rcon--;
+    count_rcon++;
 //     printf("char_xor------------------\n");
 //   for (size_t i = 0; i < rows; i++) {
 //       printf("%02x  ",char_rot_word[i]);
@@ -78,4 +78,36 @@ void xor_key_schedule(void)
     {
         password_matrix[j][i] = password_matrix[j][i]^password_matrix[j][i-1];
     }
+}
+void save_passw()
+{
+    // for(ini =0;i<10;i++)
+    int k=0; 
+    for(int i =0;i<20;i++)
+    {
+        if(i%2==0) fill_pass_matrix_hex();
+        else 
+        {
+            xor_key_schedule();
+            for(int j=0;j<4;j++)
+               for(int l=0;l<4;l++)
+                   saved_password[k][j][l] = password_matrix[j][l];
+
+            for(int l=0;l<rows;l++)
+            {
+               for(int m=0;m<cols;m++) 
+                // printf("%x ",saved_password[k][l][m]);  
+                printf("%x ",password_matrix[l][m]);  
+            printf("\n");
+
+            }
+            printf("------------\n");
+
+            k++;
+
+        }
+
+        
+    }    
+    
 }

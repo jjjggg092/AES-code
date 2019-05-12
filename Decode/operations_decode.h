@@ -199,12 +199,25 @@ void AddRoundKey()
 
   for(int i=0;i<rows;i++)
     for(int j=0;j<cols;j++){
-      state_matrix[j][i] = state[k] ^ password_matrix[j][i];
+      state_matrix[j][i] = state[k] ^ saved_password[round][j][i];
       k++;   }
+   round--;   
 }
 void F_AddRoundKey()
 {
   for(int i=0;i<rows;i++)
     for(int j=0;j<cols;j++)
-      state_matrix[i][j] = state_matrix[i][j] ^ password_matrix[i][j];
+    {
+      state_matrix[i][j] = state_matrix[i][j] ^ saved_password[round][i][j];
+      
+    }
+
+// cout<< "passwrd\n";
+//    for(int i=0;i<rows;i++)
+//     {
+//       for(int j=0;j<cols;j++)
+//       printf("%x ",saved_password[round][i][j]);   
+//       printf("\n");
+//     }
+round--;
 }
