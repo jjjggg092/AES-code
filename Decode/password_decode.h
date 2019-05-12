@@ -27,7 +27,7 @@ void fill_pass_matrix_hex(void) {
         nib_1=nibble[1];          //   lo convierte en entero para imprimir
         nib_1=nib_1 & 15;         //   solo 4 bits menos significativos
         // matrix[i][1] = nib_1;
-        rot_word[i] =inv_s[nib_0*16 + nib_1];   //cambia con la  tabla sbox
+        rot_word[i] =s[nib_0*16 + nib_1];   //cambia con la  tabla sbox
     }
 
 //   printf("------------------\n");
@@ -36,7 +36,7 @@ void fill_pass_matrix_hex(void) {
 
 //     }
 //     printf("\n");
-//   printf("------------------\n");
+// //   printf("------------------\n");
 //   for (size_t i = 0; i < rows; i++)
 //       printf("%x  ",password_matrix[i][0]);
 //     printf("\n");
@@ -93,15 +93,15 @@ void save_passw()
                for(int l=0;l<4;l++)
                    saved_password[k][j][l] = password_matrix[j][l];
 
-            for(int l=0;l<rows;l++)
-            {
-               for(int m=0;m<cols;m++) 
-                // printf("%x ",saved_password[k][l][m]);  
-                printf("%x ",password_matrix[l][m]);  
-            printf("\n");
+            // for(int l=0;l<rows;l++)
+            // {
+            //    for(int m=0;m<cols;m++) 
+            //     printf("%x ",saved_password[k][l][m]);  
+            //     // printf("%x ",password_matrix[l][m]);  
+            // printf("\n");
 
-            }
-            printf("------------\n");
+            // }
+            // printf("------------\n");
 
             k++;
 
