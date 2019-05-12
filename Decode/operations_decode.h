@@ -124,10 +124,12 @@ void ShiftRows(void) {
   state_matrix[2][2]=aux1;
   state_matrix[2][3]=aux2;
 
+  aux1 = state_matrix[1][3];
+
   for (size_t i = 0; i < 4; i++) arr[i]=state_matrix[1][i];
   for (size_t i = 0; i < 3; i++)
     state_matrix[1][i+1]=arr[i];
-  state_matrix[1][0]=arr[1];
+  state_matrix[1][0]=aux1;
 
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols ; j++) {
@@ -142,13 +144,14 @@ void matrixToArray(void){
       int k = 0;
       printf("AQUI");
       for(int i = 0; i<rows ; i++)
-          for(int j = 0; j<cols; j++){
+          for(int j = 0; j<cols; j++)
+          {
               state[k] = state_matrix[j][i];
               printf("%x ",state[k]);
 
               //printf("%x ", state_matrix[i][j]);
               k++;
-  }
+            }
 
   }
 
@@ -202,7 +205,7 @@ void AddRoundKey()
 
   for(int i=0;i<rows;i++)
     for(int j=0;j<cols;j++){
-      state_matrix[j][i] = state[k] ^ saved_password[round][j][i];
+      state_matrix[i][j] = state_matrix[i][j] ^ password_matrix[i][j];
       k++;   }
    round--;   
 }

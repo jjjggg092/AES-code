@@ -170,6 +170,7 @@
 
 #include "operations_decode.h"
 #include "password_decode.h"
+#include "write_read_disk.h"
 //--------------------------------
 using namespace std;
 
@@ -265,11 +266,15 @@ int main()
 
     }
     
-        
+
+        ShiftRows();
+        SubBytes();
+        fill_password_matrix();
+        print_password_matrix();
         AddRoundKey();
         cout<<"please"<<endl;
         print_state_matrix();
-
+        write_text(4);
     gets(dummy);
 
 
