@@ -16,7 +16,7 @@ void print_state_matrix(void)
                 //  cout<<" " <<state_matrix[i][j];  // mantiene fija la fila y barre las columnas
                 }
             }
-        cout<<endl<<"---------"<<endl;
+        cout<<endl<<"----------------"<<endl;
 }
 //-----------------------------------------------------------------
 void print_password_matrix(void)
@@ -34,7 +34,7 @@ void print_password_matrix(void)
                     // cout<<endl;
 
             }
-        cout<<endl<<"---------"<<endl;
+        cout<<endl<<"----------------"<<endl;
 }
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -91,15 +91,8 @@ void SubBytes(void) {
     state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
     }
   }
-  cout <<"no se algo"<<endl;
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols*2 ; j=j+2) {
-      //state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
-      printf("%x%x  ",matrix[i][j] ,matrix[i][j+1]);
-    }
-    printf("\n");
-  }
-  printf("------------------\n");
+
+  cout<<"After SubBytes\n";
   for (size_t i = 0; i < rows; i++) {
     for (size_t j = 0; j < cols ; j++) {
       printf("%x  ",state_matrix[i][j] );
@@ -112,7 +105,8 @@ void ShiftRows(void) {
   int aux1, aux2, arr[4];;
 
   aux1= state_matrix[1][0];
-  printf("Shift Rows:\n");
+  cout<<endl<<"----------------"<<endl;
+  printf("After Shift Rows:\n");
   for (size_t i = 0; i < 3; i++)
     state_matrix[1][i]=state_matrix[1][i+1];
   state_matrix[1][3]=aux1;
@@ -140,11 +134,11 @@ void ShiftRows(void) {
 
 void matrixToArray(void){
       int k = 0;
-      printf("AQUI");
+      //printf("AQUI");
       for(int i = 0; i<rows ; i++)
           for(int j = 0; j<cols; j++){
               state[k] = state_matrix[j][i];
-              printf("%x ",state[k]);
+              //printf("%x ",state[k]);
 
               //printf("%x ", state_matrix[i][j]);
               k++;
@@ -178,10 +172,10 @@ void matrixToArray(void){
 	for (int i = 0; i < 16; i++) {
 		state[i] = tmp[i];
 	}
-
-    puts("MixColums: ");
+  cout<<endl<<"----------------"<<endl;
+  puts("After MixColums: ");
     for(int i = 0; i<16;i++){
-        printf("%x ", state_matrix[i]);}
+        printf("%x ", state[i]);}
 }
 
 void AddRoundKey()

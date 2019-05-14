@@ -117,16 +117,11 @@ char abc[]= "abcdefghijklmnopqrstuvwxyz";
 
 
 //------------------------------------------
-int main()
-{
+int main(){
 
-
-    printf("%x ",0x61^0xef^0x01);
-    unsigned int i;
-    int j;
-    FILE *in_file;
-    if ((in_file = fopen ("texto.txt", "rt")) == NULL)
-    printf("File no existe");
+    printf("-----------------------------------------------AES Encryption Standard-----------------------------------------------\n");
+    unsigned int i; int j; FILE *in_file;
+    if ((in_file = fopen ("texto.txt", "rt")) == NULL) printf("File no existe");
     else
     {
     fseek(in_file, 0, SEEK_SET);
@@ -134,59 +129,64 @@ int main()
     }
     fclose(in_file);
 
-    cout << "password:";
+    cout << "Enter password: ";
     //gets(password);
-    fgets(password,80,stdin);                       // capture password through keyboard
+    fgets(password, 80, stdin);                       // capture password through keyboard
     password_lenght= strlen(password);
 
-    for(i=0;i<password_lenght;i++) {cout << password[i];}
+    //for(i=0;i<password_lenght;i++) {cout << password[i];}
 
     //cout << endl << "-------------\n";
 
-    fill_password_matrix();
+    fill_password_matrix(); fill_state_matrix();
+    cout<<"\nPlaintex (Input)"<<endl;
+    print_state_matrix();
+    cout<<"Cipher key"<<endl;
     print_password_matrix();
 
-    fill_state_matrix();
-    cout<<"plaintex matrix"<<endl;
-    print_state_matrix();
-
     F_AddRoundKey();
+    cout<<"Start of Round 1"<<endl;
     print_state_matrix();
+   
 
 
-    for(int i=0;i<18;i++)
+    for(int i=0;i<9;i++)
         {
-            if (i%2==0)
-            {
+            //if (i%2==0)
+            //{
                 fill_pass_matrix_hex();
-                cout<<"passw"<<endl;
+                //cout<<"passw"<<endl;
 
-                print_password_matrix();
-                printf("\ncount_rcon >>%d\n", count_rcon);
-            }
-            else
-            {
+                
+                //printf("\ncount_rcon >>%d\n", count_rcon);
+            //}
+            //else
+            //{
                 xor_key_schedule();
-                cout<<"passw"<<endl;
+                //cout<<"passw"<<endl;
 
-                print_password_matrix();
+                //print_password_matrix();
 
-                cout<<"subbytes matrix"<<endl;
+                //cout<<"subbytes matrix"<<endl;
 
                 SubBytes();
-                cout<<"SR matrix"<<endl;
+                //cout<<"SR matrix"<<endl;
 
                 ShiftRows();
                 // print_state_matrix();
 
                 matrixToArray();
                 MixColumns();
+                cout<<endl<<"\n----------------"<<endl;
+                cout<<"Round Key\n";
+                print_password_matrix();
+
                 AddRoundKey();
                 cout<<"AddRounKey"<<endl;
 
                 print_state_matrix();
 
-            }
+            //}
         }
 
                 fill_pass_matrix_hex();
@@ -195,7 +195,7 @@ int main()
                SubBytes();
                 ShiftRows();
                 F_AddRoundKey();
-                cout<<"please"<<endl;
+                //cout<<"please"<<endl;
                 print_state_matrix();
                 write_text(4);
 
