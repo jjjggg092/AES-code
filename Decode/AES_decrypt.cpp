@@ -184,7 +184,6 @@ char abc[]= "abcdefghijklmnopqrstuvwxyz";
 int main()
 {
 
-    printf("%x ",0x61^0xef^0x01);
     unsigned int i;
     int j;
     FILE *in_file;
@@ -217,62 +216,29 @@ int main()
 
     save_passw();
     F_AddRoundKey();
+    cout<<"Initial Round";
     print_state_matrix();
-
-    // ShiftRows();
-    // print_state_matrix();
-
-    // SubBytes();
-    // print_state_matrix();
-  
-
-
-    // F_AddRoundKey();
-
-
 
     for(int i=0;i<9;i++)
     {
 
-                cout<<"SR matrix"<<endl;
                 ShiftRows();
-
-                cout<<"subbytes matrix"<<endl;
                 SubBytes();
-
-                // cout<<"AddRounKey"<<endl;
-
-                // AddRoundKey();
-
-                // SubBytes();
-                // print_state_matrix();
-
-                cout<<"AddRounKey"<<endl;
-
                 F_AddRoundKey();
-                print_state_matrix();
-
-                cout<<"MC matrix"<<endl;
-
                 matrixToArray();
                 MixColumns();
-
-                // cout<<"SR matrix"<<endl;
-                // ShiftRows();
-
-
-
+                printf("-------------\n");
+                cout<<i+1<<" Round"<<endl;
                 print_state_matrix();
 
     }
     
-
+        printf("-------------\n");
         ShiftRows();
         SubBytes();
         fill_password_matrix();
-        print_password_matrix();
         AddRoundKey();
-        cout<<"please"<<endl;
+        cout<<"Decrypted Text"<<endl;
         print_state_matrix();
         write_text(4);
     gets(dummy);

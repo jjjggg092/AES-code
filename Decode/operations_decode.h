@@ -91,28 +91,27 @@ void SubBytes(void) {
     state_matrix[i][(int)j/2]=inv_s[nib_0*16 + nib_1];
     }
   }
-  cout <<"no se algo"<<endl;
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols*2 ; j=j+2) {
-      //state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
-      printf("%x%x  ",matrix[i][j] ,matrix[i][j+1]);
-    }
-    printf("\n");
-  }
-  printf("------------------\n");
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols ; j++) {
-      printf("%x  ",state_matrix[i][j] );
-    }
-    printf("\n");
-  }
+  // for (size_t i = 0; i < rows; i++) {
+  //   for (size_t j = 0; j < cols*2 ; j=j+2) {
+  //     //state_matrix[i][(int)j/2]=s[nib_0*16 + nib_1];
+  //     printf("%x%x  ",matrix[i][j] ,matrix[i][j+1]);
+  //   }
+  //   printf("\n");
+  // }
+  // printf("------------------\n");
+  // for (size_t i = 0; i < rows; i++) {
+  //   for (size_t j = 0; j < cols ; j++) {
+  //     printf("%x  ",state_matrix[i][j] );
+  //   }
+  //   printf("\n");
+  // }
 }
 
 void ShiftRows(void) {
   int aux1, aux2, arr[4];;
 
   aux1= state_matrix[3][0];
-  printf("Shift Rows:\n");
+  // printf("Shift Rows:\n");
   for (size_t i = 0; i < 3; i++)
     state_matrix[3][i]=state_matrix[3][i+1];
   state_matrix[3][3]=aux1;
@@ -131,25 +130,22 @@ void ShiftRows(void) {
     state_matrix[1][i+1]=arr[i];
   state_matrix[1][0]=aux1;
 
-  for (size_t i = 0; i < rows; i++) {
-    for (size_t j = 0; j < cols ; j++) {
-      printf("%x  ",state_matrix[i][j] );
-    }
-    printf("\n");
-  }
+  // for (size_t i = 0; i < rows; i++) {
+  //   for (size_t j = 0; j < cols ; j++) {
+  //     printf("%x  ",state_matrix[i][j] );
+  //   }
+  //   printf("\n");
+  // }
 }
 
 
 void matrixToArray(void){
       int k = 0;
-      printf("AQUI");
       for(int i = 0; i<rows ; i++)
           for(int j = 0; j<cols; j++)
           {
               state[k] = state_matrix[j][i];
-              printf("%x ",state[k]);
-
-              //printf("%x ", state_matrix[i][j]);
+                            //printf("%x ", state_matrix[i][j]);
               k++;
             }
 
@@ -189,13 +185,13 @@ void matrixToArray(void){
     //     printf("%x ", state_matrix[i]);}
 
   int k=0;
-  printf("state");
+  // printf("state");
 	for (int i = 0; i < 4;i++) {
     for(int j = 0; j<4;j++){
        state_matrix[j][i] =  state[k];
-       printf("%x ",state[k]);
+      //  printf("%x ",state[k]);
        k++;}
-  printf("\n");     
+  // printf("\n");     
   }
 }
 
@@ -218,12 +214,12 @@ void F_AddRoundKey()
       
     }
 
-cout<< "passwrd\n";
-   for(int i=0;i<rows;i++)
-    {
-      for(int j=0;j<cols;j++)
-      printf("%x ",saved_password[round][i][j]);   
-      printf("\n");
-    }
+// cout<< "passwrd\n";
+//    for(int i=0;i<rows;i++)
+//     {
+//       for(int j=0;j<cols;j++)
+//       printf("%x ",saved_password[round][i][j]);   
+//       printf("\n");
+//     }
 round--;
 }
